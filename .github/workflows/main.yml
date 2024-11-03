@@ -16,7 +16,7 @@ jobs:
         id: version_bump
         uses: anothrNick/github-tag-action@1.39.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           RELEASE_BRANCHES: 'master,v2'
           DEFAULT_BUMP: 'patch'
           WITH_V: true
@@ -42,7 +42,7 @@ jobs:
 
       - run: npm ci
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGE_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       - run: npm run build
 
       - name: run unit tests
@@ -61,20 +61,4 @@ jobs:
       - name: publish-git
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - run: npm run build-storybook
-      - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v1.2
-        with:
-          publish-dir: './devapp-build'
-          production-branch: master
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy from GitHub Actions"
-          enable-pull-request-comment: false
-          enable-commit-comment: true
-          overwrites-pull-request-comment: true
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 1
+          NODE_AUTH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
