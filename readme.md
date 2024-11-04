@@ -34,7 +34,7 @@
     ·
     <a href="https://github.com/g-loot/react-tournament-brackets/issues">Request Feature</a>
   </p>
-  Some small additions to make tournaments with pre-rounds visually functional.
+  Some small additions to make tournaments with pre-rounds more visually functional.
 </p>
 
 
